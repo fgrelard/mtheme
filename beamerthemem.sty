@@ -15,6 +15,9 @@
 \usepackage{etoolbox}
 \usepackage{tikz}
 \usepackage{pgfplots}
+%\useoutertheme{infolines}
+
+
 
 \usetikzlibrary{backgrounds}
 
@@ -34,6 +37,10 @@
 %{{{ --- Titlepage --------------------
 
 \def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi}
+
+\definecolor{chipColor}{RGB}{60,70,70}
+\setbeamercolor{section in head}{fg=white, bg=chipColor}
+\setbeamerfont{block title}{series=\bfseries}
 
 \def\titlepage{\usebeamertemplate{title page}}
 \setbeamertemplate{title page}
@@ -65,6 +72,11 @@
     \else%
     \vspace*{3mm}
     {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+    \fi%
+    \ifx\inserttitlegraphic\@empty%
+    \else%
+    \vspace*{1cm}
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
     \fi%
     \vfill
     \vspace*{5mm}
@@ -133,10 +145,11 @@
 \newcommand{\plain}[2][]{%
   \begingroup
   \setbeamercolor{background canvas}{bg=mDarkTeal}
-  \begin{frame}{#1}
-    \centering
-    \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
-  \end{frame}
+    \begin{frame}[plain]{#1}
+      \centering
+      \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
+    \end{frame}
+ 
   \endgroup
 }
 
@@ -184,8 +197,15 @@
 {%
 \begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
   \hfill\usebeamerfont{page number in head/foot}%
-  \insertframenumber%
+  \insertframenumber{} / \inserttotalframenumber%
 \end{beamercolorbox}%
+}
+
+\setbeamertemplate{headline}
+{%
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,ht=3.5ex,dp=2ex]{section in head}%
+    \usebeamerfont{page number in head/foot}\MakeLowercase{\protect\insertsectionhead}%
+  \end{beamercolorbox}%
 }
 
 \setbeamertemplate{footnote}
@@ -209,7 +229,7 @@
     \progressbar@titleprogressbar
   \end{beamercolorbox}
 \fi
-\vspace{2em}
+\vspace{0.8em}
 }
 %}}}
 %{{{ --- pgfplots ---------------------
