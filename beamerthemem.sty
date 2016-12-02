@@ -20,10 +20,10 @@
 
 
 \usetikzlibrary{backgrounds}
-
+\usetikzlibrary{calc}
 \usecolortheme{metropolis}
 \usefonttheme{metropolis}
-
+\usepackage{soul}
 %}}}
 %{{{ --- Options ----------------------
 
@@ -182,18 +182,37 @@
 \endgroup
 }
 
+% \newcommand{\crd}[1]{\tikz[overlay, remember picture, baseline=.5ex]\coordinate (#1);}
+% \newcounter{n}
+% \newdimen\XCoord
+% \newdimen\YCoord
+% \newcommand*{\ExtractCoordinateP}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord};}%
+% \newdimen\XCoordQ
+% \newdimen\YCoordQ
+% \newcommand*{\ExtractCoordinateQ}[1]{\path (#1); \pgfgetlastxy{\XCoordQ}{\YCoordQ};}%
 
 %---------------------------------------------------------------------
 % Frametitle
 %---------------------------------------------------------------------
 \setbeamertemplate{frametitle}
 {
-\vspace{0.3em}
-\usebeamerfont{frametitle}\centering{\insertframetitle}
-\vspace{-1.3em}
- \begin{center}
-   \begin{tikzpicture}\draw[line width=1mm, mLightBrown] (0.4\textwidth, 0) -- (0.5\textwidth, 0);\end{tikzpicture}%
+  \vspace{3em}
+
+\begin{beamercolorbox}   [wd=\paperwidth,ht=2ex,dp=1ex]{frametitle}%
+\begin{center}
+  \usebeamerfont{frametitle}{\insertframetitle}
+  \underline{\makebox[0.2\paperwidth][c]{}}
 \end{center}
+
+\end{beamercolorbox}
+%     \stepcounter{n}% 
+% \begin{center}
+%   \usebeamerfont{frametitle}{\crd{p}\insertframetitle\crd{q}}%
+% \end{center}%
+% \vspace*{0.3em}
+% \begin{center}
+%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBrown] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
+% \end{center}
 }
 
 
@@ -221,7 +240,7 @@
 
 \newcommand{\plain}[2][]{%
   \begingroup
-  % \setbeamercolor{background canvas}{bg=mDarkTeal}
+  \setbeamercolor{background canvas}{bg=mLightBrown}
   \begin{frame}[plain]{#1}
     \centering
     \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
@@ -233,17 +252,17 @@
 %}}}
 %{{{ --- Itemize ----------------------
 
-\setlength{\leftmargini}{1em}
+\setlength{\leftmargini}{2.5em}
 
 % Actually one level should be enough but ...
 \setlength{\leftmarginii}{1em}
 \setlength{\leftmarginiii}{1em}
 
-\newcommand{\itemBullet}{∙}
+\newcommand{\itemBullet}{}
 
-\setbeamertemplate{itemize item}{\itemBullet}
-\setbeamertemplate{itemize subitem}{\itemBullet}
-\setbeamertemplate{itemize subsubitem}{\itemBullet}
+%\setbeamertemplate{itemize item}{\itemBullet}
+%\setbeamertemplate{itemize subitem}{\itemBullet}
+%\setbeamertemplate{itemize subsubitem}{\itemBullet}
 \setlength{\parskip}{0.5em}
 
 
