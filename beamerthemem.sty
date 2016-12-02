@@ -39,8 +39,57 @@
 \def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain]{\titlepage}\fi}
 
 \definecolor{chipColor}{RGB}{60,70,70}
-\setbeamercolor{section in head}{fg=white, bg=chipColor}
-\setbeamerfont{block title}{series=\bfseries}
+\definecolor{hsrmRed}{rgb}{0.882352941,0,0.098039216}
+\definecolor{hsrmRedDark}{rgb}{0.588235294,0,0.058823529}
+\definecolor{hsrmWarmGreyDark}{rgb}{0.274509804,0.254901961,0.235294118}
+\definecolor{hsrmWarmGreyLight}{rgb}{0.666666667,0.647058824,0.62745098}
+
+% Secondary Colors
+\definecolor{hsrmSec1}{rgb}{0,0.588235294,0.509803922}
+\definecolor{hsrmSec1Dark}{rgb}{0,0.392156863,0.31372549}
+\definecolor{hsrmSec1Comp}{rgb}{0.294117647,0.745098039,0.882352941}
+\definecolor{hsrmSec1CompDark}{rgb}{0.196078431,0.490196078,0.568627451}
+
+\definecolor{hsrmSec2}{rgb}{0.607843137,0.764705882,0.156862745}
+\definecolor{hsrmSec2Dark}{rgb}{0.411764706,0.490196078,0.098039216}
+\definecolor{hsrmSec2Comp}{rgb}{0.254901961,0.156862745,0.509803922}
+\definecolor{hsrmSec2CompDark}{rgb}{0.176470588,0.098039216,0.333333333}
+
+\definecolor{hsrmSec3}{rgb}{0.509803922,0.078431373,0.31372549}
+\definecolor{hsrmSec3Dark}{rgb}{0.338345865,0.058823529,0.196078431}
+\definecolor{hsrmSec3Comp}{rgb}{1,0.509803922,0}
+\definecolor{hsrmSec3CompDark}{rgb}{0.666666667,0.333333333,0}
+
+% General
+\setbeamercolor{normal text}{fg=hsrmWarmGreyDark}
+\setbeamercolor{structure}{fg=hsrmWarmGreyDark}
+\setbeamercolor{alerted text}{fg=hsrmRed}
+\setbeamercolor{example text}{fg=white}
+\setbeamercolor{copyright text}{fg=hsrmWarmGreyLight}
+\setbeamercolor{palette primary}{fg=hsrmWarmGreyDark}
+\setbeamercolor{palette secondary}{fg=hsrmWarmGreyDark,bg=hsrmWarmGreyLight}
+\setbeamercolor{palette tertiary}{fg=black,bg=hsrmWarmGreyLight}
+\setbeamercolor{palette quaternary}{fg=white, bg=hsrmWarmGreyDark}
+% Titlepage
+\setbeamercolor{title}{parent=white}
+\setbeamercolor{subtitle}{parent=white}
+\setbeamercolor{institute}{parent=white}
+% Content
+\setbeamercolor{frametitle}{parent=palette primary}
+% Blocks
+\setbeamercolor{block title}{parent=palette quaternary}
+\setbeamercolor{block body}{parent=palette secondary}
+\setbeamercolor{block title example}{fg=white, bg=hsrmSec1Dark}
+\setbeamercolor{block body example}{fg=white, bg=hsrmSec1}
+\setbeamercolor{block title alerted}{fg=white, bg=hsrmRedDark}
+\setbeamercolor{block body alerted}{fg=white, bg=hsrmRed}
+% Notes
+\setbeamercolor{note page}{fg=hsrmWarmGreyDark,bg=hsrmWarmGreyLight}
+\setbeamercolor{note title}{fg=white, bg=hsrmWarmGreyDark}
+\setbeamercolor{note date}{parent=note title}
+% Page Number
+\setbeamercolor{page number in head/foot}{fg=hsrmWarmGreyDark}
+%\setbeamerfont{block title}{series=\bfseries}
 
 \def\titlepage{\usebeamertemplate{title page}}
 \setbeamertemplate{title page}
@@ -57,7 +106,7 @@
     {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
     \vspace*{0.5em}
     \fi%
-    \begin{tikzpicture}\draw[mLightBrown] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
+    \begin{tikzpicture}\draw[line width=0.25mm, mLightBrown] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
     \vspace*{1em}
     \ifx\insertauthor\@empty%
     \else%
@@ -120,6 +169,34 @@
   }
 }
 
+
+% Insert frame with section title at every section start
+\AtBeginSection[]
+{
+\begingroup
+\setbeamercolor{background canvas}{bg=mLightBrown}
+\begin{frame}[plain]
+\centering
+\vfill\usebeamerfont{section title}\textcolor{white}{\insertsectionHEAD}\vfill
+\end{frame}
+\endgroup
+}
+
+
+%---------------------------------------------------------------------
+% Frametitle
+%---------------------------------------------------------------------
+\setbeamertemplate{frametitle}
+{
+\vspace{0.3em}
+\usebeamerfont{frametitle}\centering{\insertframetitle}
+\vspace{-1.3em}
+ \begin{center}
+   \begin{tikzpicture}\draw[line width=1mm, mLightBrown] (0.4\textwidth, 0) -- (0.5\textwidth, 0);\end{tikzpicture}%
+\end{center}
+}
+
+
 \if@useTitleProgressBar
   \def\progressbar@titleprogressbar{%
     \progressbar@tmpcounta=\insertframenumber
@@ -144,12 +221,12 @@
 
 \newcommand{\plain}[2][]{%
   \begingroup
-  \setbeamercolor{background canvas}{bg=mDarkTeal}
-    \begin{frame}[plain]{#1}
-      \centering
-      \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
-    \end{frame}
- 
+  % \setbeamercolor{background canvas}{bg=mDarkTeal}
+  \begin{frame}[plain]{#1}
+    \centering
+    \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
+  \end{frame}
+  
   \endgroup
 }
 
@@ -169,20 +246,6 @@
 \setbeamertemplate{itemize subsubitem}{\itemBullet}
 \setlength{\parskip}{0.5em}
 
-%}}}
-%{{{ --- Sections ---------------------
-
-% Insert frame with section title at every section start
-\AtBeginSection[]
-{
-  \begingroup
-  \setbeamercolor{background canvas}{bg=black!2}
-  \begin{frame}[plain]
-    \vspace{2em}\usebeamerfont{section title}
-    \progressbar@sectionprogressbar%
-  \end{frame}
-  \endgroup
-}
 
 %}}}
 %{{{ --- Captions ---------------------
@@ -201,12 +264,13 @@
 \end{beamercolorbox}%
 }
 
-\setbeamertemplate{headline}
-{%
-  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,ht=3.5ex,dp=2ex]{section in head}%
-    \usebeamerfont{page number in head/foot}\MakeLowercase{\protect\insertsectionhead}%
-  \end{beamercolorbox}%
-}
+
+% \setbeamertemplate{headline}
+% {%
+%   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,ht=3.5ex,dp=2ex]{section in head}%
+%     \usebeamerfont{page number in head/foot}\MakeLowercase{\protect\insertsectionhead}%
+%   \end{beamercolorbox}%
+% }
 
 \setbeamertemplate{footnote}
 {%
@@ -215,22 +279,6 @@
   \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
 
-%}}}
-%{{{ --- Frametitle -------------------
-
-\setbeamertemplate{frametitle}{%
-\nointerlineskip
-\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.5ex,dp=1.5ex]{frametitle}
-  \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}%
-\end{beamercolorbox}%
-\if@useTitleProgressBar
-  \vspace{-.6em}
-  \begin{beamercolorbox}[wd=\paperwidth,ht=1pt,dp=0pt]{frametitle}
-    \progressbar@titleprogressbar
-  \end{beamercolorbox}
-\fi
-\vspace{0.8em}
-}
 %}}}
 %{{{ --- pgfplots ---------------------
 
@@ -349,6 +397,53 @@
 %}}}
 
 %}}}
+
+%
+% Blocks
+%
+\setbeamertemplate{block begin}
+{
+  \setbeamercolor{item}{parent=block body}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body}%
+}
+\setbeamertemplate{block end}  
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block alerted begin}
+{
+  \setbeamercolor{item}{parent=block body alerted}
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title alerted}
+    \usebeamerfont*{block title alerted}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body alerted}%
+}
+\setbeamertemplate{block alerted end}
+{\end{beamercolorbox}\vskip\smallskipamount}
+
+\setbeamertemplate{block example begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex]{block title example}
+    \usebeamerfont*{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  {\nointerlineskip\vskip-0.5pt}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body example}%
+}
+\setbeamertemplate{block example end}
+{\end{beamercolorbox}\vskip\smallskipamount}
 
 \mode
 <all>
