@@ -169,6 +169,8 @@
   }
 }
 
+\setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
+\setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 
 % Insert frame with section title at every section start
 \AtBeginSection[]
@@ -194,27 +196,25 @@
 %---------------------------------------------------------------------
 % Frametitle
 %---------------------------------------------------------------------
-\setbeamertemplate{frametitle}
-{
-  \vspace{3em}
-
-\begin{beamercolorbox}   [wd=\paperwidth,ht=2ex,dp=1ex]{frametitle}%
-\begin{center}
-  
-
-  \underline{\makebox[0.2\paperwidth][c]{\usebeamerfont{frametitle}{\insertframetitle}}}
-\end{center}
-
-\end{beamercolorbox}
-%     \stepcounter{n}% 
-% \begin{center}
-%   \usebeamerfont{frametitle}{\crd{p}\insertframetitle\crd{q}}%
-% \end{center}%
-% \vspace*{0.3em}
-% \begin{center}
-%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBrown] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
-% \end{center}
-}
+%\setbeamertemplate{frametitle}
+%{
+% % \vspace{3em}
+%\begin{beamercolorbox}   [wd=\paperwidth,ht=2ex,dp=1ex]{frametitle}%
+%\begin{center}
+%  
+%  \underline{\makebox[0.2\paperwidth][c]{\usebeamerfont{frametitle}{\insertframetitle}}}
+%\end{center}
+%
+%\end{beamercolorbox}
+%%     \stepcounter{n}% 
+%% \begin{center}
+%%   \usebeamerfont{frametitle}{\crd{p}\insertframetitle\crd{q}}%
+%% \end{center}%
+%% \vspace*{0.3em}
+%% \begin{center}
+%%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBrown] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
+%% \end{center}
+%}
 
 
 \if@useTitleProgressBar
@@ -285,12 +285,15 @@
 }
 
 
-% \setbeamertemplate{headline}
-% {%
+ \setbeamertemplate{headline}
+  {
+  \textcolor{mLightBrown}{\rule{\paperwidth}{7pt}}
+  \textcolor{mDarkBrown}{\vrule}
+
 %   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,ht=3.5ex,dp=2ex]{section in head}%
 %     \usebeamerfont{page number in head/foot}\MakeLowercase{\protect\insertsectionhead}%
 %   \end{beamercolorbox}%
-% }
+ }
 
 \setbeamertemplate{footnote}
 {%
