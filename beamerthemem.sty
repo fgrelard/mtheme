@@ -18,7 +18,6 @@
 %\useoutertheme{infolines}
 
 
-
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
 \usecolortheme{metropolis}
@@ -69,7 +68,7 @@
 \setbeamercolor{palette primary}{fg=hsrmWarmGreyDark}
 \setbeamercolor{palette secondary}{fg=hsrmWarmGreyDark,bg=mMediumBrown}
 \setbeamercolor{palette tertiary}{fg=black,bg=hsrmWarmGreyLight}
-\setbeamercolor{palette quaternary}{fg=white, bg=mDarkBrown}
+\setbeamercolor{palette quaternary}{fg=white, bg=mLightBrown}
 % Titlepage
 \setbeamercolor{title}{parent=white}
 \setbeamercolor{subtitle}{parent=white}
@@ -89,6 +88,11 @@
 \setbeamercolor{note date}{parent=note title}
 % Page Number
 \setbeamercolor{page number in head/foot}{fg=hsrmWarmGreyDark}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[ball]
+\setbeamercolor{section in head/foot}{fg=white,bg=white}
+\setbeamertemplate{section in head/foot shaded}[default][10]
+
 %\setbeamerfont{block title}{series=\bfseries}
 
 \def\titlepage{\usebeamertemplate{title page}}
@@ -173,16 +177,24 @@
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 
 % Insert frame with section title at every section start
-\AtBeginSection[]
-{
-\begingroup
-\setbeamercolor{background canvas}{bg=mLightBrown}
-\begin{frame}[plain]
-\centering
-\vfill\usebeamerfont{section title}\textcolor{white}{\insertsectionHEAD}\vfill
-\end{frame}
-\endgroup
+\AtBeginSection[]{
+  \begin{frame}[plain]
+    \frametitle{Table des matières}
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide/show/hide]
+  \end{frame}
 }
+% \AtBeginSection[]
+% {
+% \begingroup
+% \setbeamercolor{background canvas}{bg=mLightBrown}
+% \begin{frame}[plain]
+%   \tableofcontents[currentsection,currentsubsection, 
+%     hideothersubsections, 
+%     sectionstyle=show/shaded,
+%     ]
+% \end{frame}
+% \endgroup
+% }
 
 % \newcommand{\crd}[1]{\tikz[overlay, remember picture, baseline=.5ex]\coordinate (#1);}
 % \newcounter{n}
@@ -278,22 +290,21 @@
 \usenavigationsymbolstemplate{}
 \setbeamertemplate{footline}
 {%
-\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
-  \hfill\usebeamerfont{page number in head/foot}%
-  \insertframenumber{} / \inserttotalframenumber%
-\end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
+    \hfill\usebeamerfont{page number in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber%
+  \end{beamercolorbox}%
 }
 
 
- \setbeamertemplate{headline}
-  {
-  \textcolor{mLightBrown}{\rule{\paperwidth}{7pt}}
-  \textcolor{mDarkBrown}{\vrule}
 
-%   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,ht=3.5ex,dp=2ex]{section in head}%
-%     \usebeamerfont{page number in head/foot}\MakeLowercase{\protect\insertsectionhead}%
-%   \end{beamercolorbox}%
- }
+
+\setbeamertemplate{headline}
+{
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,ht=12pt,dp=7pt]{block title}%
+    \usebeamerfont{page number in head/foot}{\insertsection}
+  \end{beamercolorbox}%
+}
 
 \setbeamertemplate{footnote}
 {%
@@ -479,4 +490,4 @@
 \linespread{1.15}
 %}}}
 
-\addtobeamertemplate{frametitle}{\vspace*{0cm}}{\vspace*{0.2cm}}
+%\addtobeamertemplate{frametitle}{\vspace*{0cm}}{\vspace*{0.2cm}}
