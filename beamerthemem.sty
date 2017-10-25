@@ -16,7 +16,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 %\useoutertheme{infolines}
-
+\usepackage{calc}
 
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{calc}
@@ -27,7 +27,7 @@
 %{{{ --- Options ----------------------
 
 \newif\if@useTitleProgressBar
-\@useTitleProgressBarfalse
+\@useTitleProgressBartrue
 \DeclareOption{titleprogressbar}{\@useTitleProgressBartrue}
 
 \ProcessOptions\relax
@@ -42,6 +42,7 @@
 \definecolor{hsrmRedDark}{rgb}{0.588235294,0,0.058823529}
 \definecolor{hsrmWarmGreyDark}{rgb}{0.274509804,0.254901961,0.235294118}
 \definecolor{hsrmWarmGreyLight}{rgb}{0.666666667,0.647058824,0.62745098}
+\definecolor{paleGrey}{rgb}{0.9,0.9,0.9}
 
 % Secondary Colors
 \definecolor{hsrmSec1}{rgb}{0,0.588235294,0.509803922}
@@ -87,12 +88,17 @@
 \setbeamercolor{note title}{fg=white, bg=hsrmWarmGreyDark}
 \setbeamercolor{note date}{parent=note title}
 % Page Number
-\setbeamercolor{page number in head/foot}{fg=hsrmWarmGreyDark}
-\setbeamertemplate{section in toc}[sections numbered]
-\setbeamertemplate{subsection in toc}[ball]
 \setbeamercolor{section in head/foot}{fg=white,bg=white}
-\setbeamertemplate{section in head/foot shaded}[default][10]
-
+\setbeamertemplate{section in head/foot shaded}[default][100]
+\setbeamercolor{page number in head/foot}{fg=hsrmWarmGreyDark}
+% \setbeamertemplate{section in toc}[circle]
+% \setbeamertemplate{subsection in toc}
+%   {\leavevmode\leftskip=2em$\bullet$\hskip1em\inserttocsubsection\par}
+% \setbeamercolor{section in head/foot}{fg=white,bg=white}
+% \setbeamertemplate{section in head/foot shaded}[default][10]
+% \setbeamercolor{section in toc}{fg=hsrmWarmGreyLight, bg=hsrmWarmGreyLight}
+% \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+% \setbeamercolor{subsection in toc}{fg=white}
 %\setbeamerfont{block title}{series=\bfseries}
 
 \def\titlepage{\usebeamertemplate{title page}}
@@ -142,8 +148,9 @@
 \makeatletter
 \def\progressbar@sectionprogressbar{}
 \def\progressbar@titleprogressbar{}
-\newcount\progressbar@tmpcounta % auxiliary counter
-\newcount\progressbar@tmpcountb % auxiliary counter
+\newcounter{progressbar@tmpcounta} % auxiliary counter
+\newcounter{progressbar@tmpcountsection} % auxiliary counter
+\newcounter{progressbar@tmpcountb} % auxiliary counter
 \newdimen\progressbar@pbht      % progressbar height
 \newdimen\progressbar@pbwd      % progressbar width
 \newdimen\progressbar@tmpdim    % auxiliary dimension
@@ -152,36 +159,54 @@
 \progressbar@pbht=0.4pt
 
 % the progress bar
-\def\progressbar@sectionprogressbar{%
-  \progressbar@tmpcounta=\insertframenumber
-  \progressbar@tmpcountb=\inserttotalframenumber
-  \progressbar@tmpdim=\progressbar@pbwd
-  \multiply\progressbar@tmpdim by \progressbar@tmpcounta
-  \divide\progressbar@tmpdim by \progressbar@tmpcountb
+% \def\progressbar@sectionprogressbar{%
+%   \progressbar@tmpcounta=\insertframenumber
+%   \progressbar@tmpcountb=\inserttotalframenumber
+%   \progressbar@tmpdim=\progressbar@pbwd
+%   \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+%   \divide\progressbar@tmpdim by \progressbar@tmpcountb
 
-  \makebox[\textwidth][c]{
-    \begin{tikzpicture}[tight background]
+%   \makebox[\textwidth][c]{
+%     \begin{tikzpicture}[tight background]
 
-      \node[anchor=west, mDarkTeal, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
+%       \node[anchor=west, mDarkTeal, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
 
-      \draw[anchor=west, mDarkTeal!20, fill=mDarkTeal!20, inner sep=0pt]
-      (2pt, -16pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+%       \draw[anchor=west, mDarkTeal!20, fill=mDarkTeal!20, inner sep=0pt]
+%       (2pt, -16pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
 
-      \draw[anchor=west, mDarkTeal, fill=mDarkTeal, inner sep=0pt]
-      (2pt, -16pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
-    \end{tikzpicture}%
-  }
-}
+%       \draw[anchor=west, mDarkTeal, fill=mDarkTeal, inner sep=0pt]
+%       (2pt, -16pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+%     \end{tikzpicture}%
+%   }
+% }
 
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 
 % Insert frame with section title at every section start
 \AtBeginSection[]{
+  \begingroup
+  \setbeamercolor{background canvas}{bg=mLightBrown}
+    
+  \setbeamertemplate{subsection in toc}
+  {\leavevmode\leftskip=2em$\bullet$\hskip1em\inserttocsubsection\par}
+
+%  \setbeamercolor{section in toc shaded}{bg=paleGrey}
+  
+
+  \setbeamercolor{section in toc}{fg=paleGrey, bg=mLightBrown}
+  \setbeamercolor{local structure}{fg=mVeryLightBlue,bg=mLightBrown}
+  \setbeamercolor{section in toc shaded}{fg=mLightBrown, bg=mLightBrown}
+  \setbeamertemplate{section in toc}[circle]
+  \setbeamertemplate{section in toc shaded}[default][80]
+
+
+  \setbeamercolor{subsection in toc}{fg=paleGrey, bg=mLightBrown}
   \begin{frame}[plain]
-    \frametitle{Table des matières}
-    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide/show/hide]
+    \frametitle{\textcolor{paleGrey}{Table des matières}}
+    \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=hide/show/hide]
   \end{frame}
+  \endgroup
 }
 % \AtBeginSection[]
 % {
@@ -207,13 +232,41 @@
 
 %---------------------------------------------------------------------
 % Frametitle
-%---------------------------------------------------------------------
+% ---------------------------------------------------------------------
+\setbeamertemplate{headline}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,ht=12pt,dp=7pt]{block title}%
+    \usebeamerfont{page number in head/foot}{\insertsection}
+  \end{beamercolorbox}%
+  \if@useTitleProgressBar
+  \nointerlineskip
+  % \vspace{-0.7cm}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0pt,dp=5pt]{section}
+    \progressbar@titleprogressbar
+  \end{beamercolorbox}
+  \fi
+ \nointerlineskip
+  % \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=5pt,dp=1.5ex]{frametitle}
+  %   \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
+  % \end{beamercolorbox}
+  % \vspace{0.5em}
+}
+% }}}
+
+\setbeamertemplate{frametitle}{%
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=0pt,dp=1.5ex]{frametitle}
+     \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
+   \end{beamercolorbox}
+   \vspace{0.5em}
+ }
+
 %\setbeamertemplate{frametitle}
 %{
 % % \vspace{3em}
 %\begin{beamercolorbox}   [wd=\paperwidth,ht=2ex,dp=1ex]{frametitle}%
 %\begin{center}
-%  
+
+% 
 %  \underline{\makebox[0.2\paperwidth][c]{\usebeamerfont{frametitle}{\insertframetitle}}}
 %\end{center}
 %
@@ -230,18 +283,22 @@
 
 
 \if@useTitleProgressBar
-  \def\progressbar@titleprogressbar{%
-    \progressbar@tmpcounta=\insertframenumber
-    \progressbar@tmpcountb=\inserttotalframenumber
-    \progressbar@tmpdim=\paperwidth
-    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
-    \divide\progressbar@tmpdim by \progressbar@tmpcountb
-
-    \begin{tikzpicture}[tight background]
-      \draw[mDarkBrown, fill=mDarkBrown] (0, 0) rectangle (\paperwidth, 0.2pt);
-      \draw[mLightBrown, fill=mLightBrown] (0, 0) rectangle (\progressbar@tmpdim, 0.2pt);
-    \end{tikzpicture}
-  }
+\def\progressbar@titleprogressbar{%
+  \setcounter{progressbar@tmpcounta}{\insertpagenumber-\insertsectionstartpage}
+  \setcounter{progressbar@tmpcountb}{\insertsectionendpage-\insertsectionstartpage}
+  \ifnum\value{progressbar@tmpcountb}=0
+  \setcounter{progressbar@tmpcountb}{1}
+  \fi
+  \progressbar@tmpdim=\paperwidth\relax
+  \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
+  \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
+  
+%  \the\progressbar@tmpdim
+  \begin{tikzpicture}[tight background]
+    \draw[mMediumBrown, fill=mMediumBrown] (0, 0) rectangle (\paperwidth, 2pt);
+    \draw[mDarkBrown, fill=mDarkBrown] (0, 0) rectangle (\progressbar@tmpdim, 2pt);
+  \end{tikzpicture}
+}
 \fi
 %}}}
 %{{{ --- Commands ---------------------
@@ -299,12 +356,12 @@
 
 
 
-\setbeamertemplate{headline}
-{
-  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,ht=12pt,dp=7pt]{block title}%
-    \usebeamerfont{page number in head/foot}{\insertsection}
-  \end{beamercolorbox}%
-}
+% \setbeamertemplate{headline}
+% {
+%   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,ht=12pt,dp=7pt]{block title}%
+%     \usebeamerfont{page number in head/foot}{\insertsection}
+%   \end{beamercolorbox}%
+% }
 
 \setbeamertemplate{footnote}
 {%
@@ -461,7 +518,8 @@
   {\nointerlineskip\vskip-0.5pt}%
   \usebeamerfont{block body alerted}%
   \begin{beamercolorbox}[sep=.5ex,dp=0.6ex,leftskip=0.5ex,rightskip=0.5ex,vmode]{block body alerted}%
-}
+  }
+  
 \setbeamertemplate{block alerted end}
 {\end{beamercolorbox}\vskip\smallskipamount}
 
