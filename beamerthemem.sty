@@ -67,9 +67,9 @@
 \setbeamercolor{example text}{fg=white}
 \setbeamercolor{copyright text}{fg=hsrmWarmGreyLight}
 \setbeamercolor{palette primary}{fg=hsrmWarmGreyDark}
-\setbeamercolor{palette secondary}{fg=hsrmWarmGreyDark,bg=mMediumBrown}
+\setbeamercolor{palette secondary}{fg=hsrmWarmGreyDark,bg=mMediumBlue}
 \setbeamercolor{palette tertiary}{fg=black,bg=hsrmWarmGreyLight}
-\setbeamercolor{palette quaternary}{fg=white, bg=mLightBrown}
+\setbeamercolor{palette quaternary}{fg=white, bg=mLightBlue}
 % Titlepage
 \setbeamercolor{title}{parent=white}
 \setbeamercolor{subtitle}{parent=white}
@@ -116,7 +116,7 @@
     {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
     \vspace*{0.5em}
     \fi%
-    \begin{tikzpicture}\draw[line width=0.25mm, mLightBrown] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
+    \begin{tikzpicture}\draw[line width=0.25mm, mLightBlue] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
     \vspace*{1em}
     \ifx\insertauthor\@empty%
     \else%
@@ -186,7 +186,7 @@
 % Insert frame with section title at every section start
 \AtBeginSection[]{
   \begingroup
-  \setbeamercolor{background canvas}{bg=mLightBrown}
+  \setbeamercolor{background canvas}{bg=mLightBlue}
     
   \setbeamertemplate{subsection in toc}
   {\leavevmode\leftskip=2em$\bullet$\hskip1em\inserttocsubsection\par}
@@ -194,14 +194,14 @@
 %  \setbeamercolor{section in toc shaded}{bg=paleGrey}
   
 
-  \setbeamercolor{section in toc}{fg=paleGrey, bg=mLightBrown}
-  \setbeamercolor{local structure}{fg=mVeryLightBlue,bg=mLightBrown}
-  \setbeamercolor{section in toc shaded}{fg=mLightBrown, bg=mLightBrown}
+  \setbeamercolor{section in toc}{fg=paleGrey, bg=mLightBlue}
+  \setbeamercolor{local structure}{fg=mVeryLightBlue,bg=mLightBlue}
+  \setbeamercolor{section in toc shaded}{fg=mLightBlue, bg=mLightBlue}
   \setbeamertemplate{section in toc}[circle]
   \setbeamertemplate{section in toc shaded}[default][80]
 
 
-  \setbeamercolor{subsection in toc}{fg=paleGrey, bg=mLightBrown}
+  \setbeamercolor{subsection in toc}{fg=paleGrey, bg=mLightBlue}
   \begin{frame}[plain]
     \frametitle{\textcolor{paleGrey}{Table des matières}}
     \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=hide/show/hide]
@@ -211,7 +211,7 @@
 % \AtBeginSection[]
 % {
 % \begingroup
-% \setbeamercolor{background canvas}{bg=mLightBrown}
+% \setbeamercolor{background canvas}{bg=mLightBlue}
 % \begin{frame}[plain]
 %   \tableofcontents[currentsection,currentsubsection, 
 %     hideothersubsections, 
@@ -277,7 +277,7 @@
 %% \end{center}%
 %% \vspace*{0.3em}
 %% \begin{center}
-%%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBrown] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
+%%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBlue] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
 %% \end{center}
 %}
 
@@ -295,8 +295,8 @@
   
 %  \the\progressbar@tmpdim
   \begin{tikzpicture}[tight background]
-    \draw[mMediumBrown, fill=mMediumBrown] (0, 0) rectangle (\paperwidth, 2pt);
-    \draw[mDarkBrown, fill=mDarkBrown] (0, 0) rectangle (\progressbar@tmpdim, 2pt);
+    \draw[mMediumBlue, fill=mMediumBlue] (0, 0) rectangle (\paperwidth, 2pt);
+    \draw[mDarkBlue, fill=mDarkBlue] (0, 0) rectangle (\progressbar@tmpdim, 2pt);
   \end{tikzpicture}
 }
 \fi
@@ -310,7 +310,7 @@
 
 \newcommand{\plain}[2][]{%
   \begingroup
-  \setbeamercolor{background canvas}{bg=mLightBrown}
+  \setbeamercolor{background canvas}{bg=mLightBlue}
   \begin{frame}[plain]{#1}
     \centering
     \vfill\vspace{1em}\usebeamerfont{section title}\textcolor{white}{\scshape #2}\vfill
