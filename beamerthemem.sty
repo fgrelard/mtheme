@@ -243,7 +243,7 @@
   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=0pt,dp=1.5ex]{frametitle}
      \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
    \end{beamercolorbox}
-   \vspace{0.5em}
+   %\vspace{0.5em}
  }
 
 %\setbeamertemplate{frametitle}
@@ -272,7 +272,7 @@
 \def\progressbar@titleprogressbar{%
   \setcounter{progressbar@tmpcounta}{\insertpagenumber-\insertsectionstartpage}
   \setcounter{progressbar@tmpcountb}{\insertsectionendpage-\insertsectionstartpage}
-  \ifnum\value{progressbar@tmpcountb}=0
+  \ifnum\value{progressbar@tmpcountb}<1
   \setcounter{progressbar@tmpcountb}{1}
   \fi
   \progressbar@tmpdim=\paperwidth\relax
