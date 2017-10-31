@@ -85,7 +85,9 @@
 % \setbeamercolor{section in toc}{fg=hsrmWarmGreyLight, bg=hsrmWarmGreyLight}
 % \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
 % \setbeamercolor{subsection in toc}{fg=white}
-%\setbeamerfont{block title}{series=\bfseries}
+% \setbeamerfont{block title}{series=\bfseries}
+
+
 
 \def\titlepage{\usebeamertemplate{title page}}
 \setbeamertemplate{title page}
@@ -144,27 +146,6 @@
 \progressbar@pbwd=22em
 \progressbar@pbht=0.4pt
 
-% the progress bar
-% \def\progressbar@sectionprogressbar{%
-%   \progressbar@tmpcounta=\insertframenumber
-%   \progressbar@tmpcountb=\inserttotalframenumber
-%   \progressbar@tmpdim=\progressbar@pbwd
-%   \multiply\progressbar@tmpdim by \progressbar@tmpcounta
-%   \divide\progressbar@tmpdim by \progressbar@tmpcountb
-
-%   \makebox[\textwidth][c]{
-%     \begin{tikzpicture}[tight background]
-
-%       \node[anchor=west, mDarkTeal, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
-
-%       \draw[anchor=west, mDarkTeal!20, fill=mDarkTeal!20, inner sep=0pt]
-%       (2pt, -16pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
-
-%       \draw[anchor=west, mDarkTeal, fill=mDarkTeal, inner sep=0pt]
-%       (2pt, -16pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
-%     \end{tikzpicture}%
-%   }
-% }
 
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
@@ -194,27 +175,7 @@
   \end{frame}
   \endgroup
 }
-% \AtBeginSection[]
-% {
-% \begingroup
-% \setbeamercolor{background canvas}{bg=mLightBlue}
-% \begin{frame}[plain]
-%   \tableofcontents[currentsection,currentsubsection, 
-%     hideothersubsections, 
-%     sectionstyle=show/shaded,
-%     ]
-% \end{frame}
-% \endgroup
-% }
 
-% \newcommand{\crd}[1]{\tikz[overlay, remember picture, baseline=.5ex]\coordinate (#1);}
-% \newcounter{n}
-% \newdimen\XCoord
-% \newdimen\YCoord
-% \newcommand*{\ExtractCoordinateP}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord};}%
-% \newdimen\XCoordQ
-% \newdimen\YCoordQ
-% \newcommand*{\ExtractCoordinateQ}[1]{\path (#1); \pgfgetlastxy{\XCoordQ}{\YCoordQ};}%
 
 %---------------------------------------------------------------------
 % Frametitle
@@ -232,10 +193,6 @@
   \end{beamercolorbox}
   \fi
  \nointerlineskip
-  % \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=5pt,dp=1.5ex]{frametitle}
-  %   \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
-  % \end{beamercolorbox}
-  % \vspace{0.5em}
 }
 % }}}
 
@@ -243,35 +200,43 @@
   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=0pt,dp=1.5ex]{frametitle}
      \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
    \end{beamercolorbox}
-   %\vspace{0.5em}
  }
 
-%\setbeamertemplate{frametitle}
-%{
-% % \vspace{3em}
-%\begin{beamercolorbox}   [wd=\paperwidth,ht=2ex,dp=1ex]{frametitle}%
-%\begin{center}
+ \makeatletter
+ \newcount\beamer@sectionstartframe
+ \newcount\beamer@sectionendframe
 
-% 
-%  \underline{\makebox[0.2\paperwidth][c]{\usebeamerfont{frametitle}{\insertframetitle}}}
-%\end{center}
-%
-%\end{beamercolorbox}
-%%     \stepcounter{n}% 
-%% \begin{center}
-%%   \usebeamerfont{frametitle}{\crd{p}\insertframetitle\crd{q}}%
-%% \end{center}%
-%% \vspace*{0.3em}
-%% \begin{center}
-%%   \begin{tikzpicture}[overlay, remember picture]{\ExtractCoordinateP{$(p)$} \ExtractCoordinateQ{$(q)$} \draw[line width=0.75mm, mLightBlue] (-0.4, \YCoord) --  (0.4, \YCoordQ);}\end{tikzpicture}%
-%% \end{center}
-%}
+ \beamer@sectionstartframe=1
+
+ \apptocmd{\beamer@section}{\addtocontents{nav}{\protect\headcommand{%
+       \protect\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}{}{}
+ \apptocmd{\beamer@section}{\beamer@sectionstartframe=\c@framenumber\advance\beamer@sectionstartframe by1\relax}{}{}
+ \AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
+
+     {\noexpand\headcommand{\noexpand\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}}{}{}
+ \def\beamer@startframeofsection{1}
+ \def\beamer@endframeofsection{1}
+ \def\beamer@sectionframes#1#2{%
+   \ifnum\c@framenumber<#1%
+   \else%
+   \ifnum \c@framenumber>#2%
+   \else%
+   \gdef\beamer@startframeofsection{#1}%
+   \gdef\beamer@endframeofsection{#2}%
+   \fi%
+   \fi%
+ }
+ \newcommand\insertsectionstartframe{\beamer@startframeofsection}
+ \newcommand\insertsectionendframe{\beamer@endframeofsection}
+
+ \def\beamertextwidth{\dimexpr 0.875 \textwidth\relax}
+
 
 
 \if@useTitleProgressBar
 \def\progressbar@titleprogressbar{%
-  \setcounter{progressbar@tmpcounta}{\insertpagenumber-\insertsectionstartpage}
-  \setcounter{progressbar@tmpcountb}{\insertsectionendpage-\insertsectionstartpage}
+  \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe + 1}
+  \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe + 1}
   \ifnum\value{progressbar@tmpcountb}<1
   \setcounter{progressbar@tmpcountb}{1}
   \fi
