@@ -198,45 +198,45 @@
 
 \setbeamertemplate{frametitle}{%
   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.7cm,rightskip=0.3cm,ht=0pt,dp=1.5ex]{frametitle}
-     \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
-   \end{beamercolorbox}
- }
+    \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}
+  \end{beamercolorbox}
+}
 
- \makeatletter
- \newcount\beamer@sectionstartframe
- \newcount\beamer@sectionendframe
+\makeatletter
+\newcount\beamer@sectionstartframe
+\newcount\beamer@sectionendframe
 
- \beamer@sectionstartframe=1
+\beamer@sectionstartframe=1
 
- \apptocmd{\beamer@section}{\addtocontents{nav}{\protect\headcommand{%
-       \protect\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}{}{}
- \apptocmd{\beamer@section}{\beamer@sectionstartframe=\c@framenumber\advance\beamer@sectionstartframe by1\relax}{}{}
- \AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
+\apptocmd{\beamer@section}{\addtocontents{nav}{\protect\headcommand{%
+      \protect\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}{}{}
+\apptocmd{\beamer@section}{\beamer@sectionstartframe=\c@framenumber\advance\beamer@sectionstartframe by1\relax}{}{}
+\AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
 
-     {\noexpand\headcommand{\noexpand\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}}{}{}
- \def\beamer@startframeofsection{1}
- \def\beamer@endframeofsection{1}
- \def\beamer@sectionframes#1#2{%
-   \ifnum\c@framenumber<#1%
-   \else%
-   \ifnum \c@framenumber>#2%
-   \else%
-   \gdef\beamer@startframeofsection{#1}%
-   \gdef\beamer@endframeofsection{#2}%
-   \fi%
-   \fi%
- }
- \newcommand\insertsectionstartframe{\beamer@startframeofsection}
- \newcommand\insertsectionendframe{\beamer@endframeofsection}
+    {\noexpand\headcommand{\noexpand\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}}{}{}
+\def\beamer@startframeofsection{1}
+\def\beamer@endframeofsection{1}
+\def\beamer@sectionframes#1#2{%
+  \ifnum\c@framenumber<#1%
+  \else%
+  \ifnum \c@framenumber>#2%
+  \else%
+  \gdef\beamer@startframeofsection{#1}%
+  \gdef\beamer@endframeofsection{#2}%
+  \fi%
+  \fi%
+}
+\newcommand\insertsectionstartframe{\beamer@startframeofsection}
+\newcommand\insertsectionendframe{\beamer@endframeofsection}
 
- \def\beamertextwidth{\dimexpr 0.875 \textwidth\relax}
+\def\beamertextwidth{\dimexpr 0.875 \textwidth\relax}
 
 
 
 \if@useTitleProgressBar
 \def\progressbar@titleprogressbar{%
   \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe + 1}
-  \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe + 1}
+  \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe}
   \ifnum\value{progressbar@tmpcountb}<1
   \setcounter{progressbar@tmpcountb}{1}
   \fi
