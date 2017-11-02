@@ -169,7 +169,7 @@
 
 
   \setbeamercolor{subsection in toc}{fg=paleGrey, bg=mLightBlue}
-  \begin{frame}[plain]
+  \begin{frame}[noframenumbering,plain]
     \frametitle{\textcolor{paleGrey}{Table des matières}}
     \tableofcontents[currentsection,sectionstyle=show/hide,subsectionstyle=hide/show/hide]
   \end{frame}
@@ -235,7 +235,7 @@
 
 \if@useTitleProgressBar
 \def\progressbar@titleprogressbar{%
-  \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe + 1}
+  \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe}
   \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe}
   \ifnum\value{progressbar@tmpcountb}<1
   \setcounter{progressbar@tmpcountb}{1}
