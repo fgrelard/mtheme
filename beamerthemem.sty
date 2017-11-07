@@ -27,11 +27,6 @@
 %}}}
 %{{{ --- Options ----------------------
 
-\newif\if@useTitleProgressBar
-\@useTitleProgressBartrue
-\DeclareOption{titleprogressbar}{\@useTitleProgressBartrue}
-
-\ProcessOptions\relax
 
 %}}}
 %{{{ --- Titlepage --------------------
@@ -133,6 +128,12 @@
 %}}}
 %{{{ --- Progressbar ------------------
 
+\newif\if@useTitleProgressBar
+\@useTitleProgressBartrue
+\DeclareOption{titleprogressbar}{\@useTitleProgressBartrue}
+
+\ProcessOptions\relax
+
 \makeatletter
 \def\progressbar@sectionprogressbar{}
 \def\progressbar@titleprogressbar{}
@@ -146,6 +147,47 @@
 \progressbar@pbwd=22em
 \progressbar@pbht=0.4pt
 
+
+\if@useTitleProgressBar
+\def\progressbar@titleprogressbar{%
+  \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe}
+  \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe}
+  \ifnum\value{progressbar@tmpcountb}<1
+  \setcounter{progressbar@tmpcountb}{1}
+  \fi
+  \ifnum\value{progressbar@tmpcountb}>1
+    \progressbar@tmpdim=\paperwidth\relax
+  % \showthe\value{progressbar@tmpcounta}
+  % \showthe\value{progressbar@tmpcountb}
+  \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
+  \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
+  \fi
+  
+%  \the\progressbar@tmpdim
+  \begin{tikzpicture}[tight background]
+    \draw[mMediumBlue, fill=mMediumBlue] (0, 0) rectangle (\paperwidth, 2pt);
+    \draw[mDarkBlue, fill=mDarkBlue] (0, 0) rectangle (\progressbar@tmpdim, 2pt);
+  \end{tikzpicture}
+}
+\fi
+
+\setbeamertemplate{headline}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,ht=12pt,dp=7pt]{block title}%
+    \usebeamerfont{page number in head/foot}{\insertsection}
+  \end{beamercolorbox}%
+  \if@useTitleProgressBar
+  \nointerlineskip
+  % \vspace{-0.7cm}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0pt,dp=5pt]{section}
+    \progressbar@titleprogressbar
+  \end{beamercolorbox}
+  \fi
+ \nointerlineskip
+}
+
+
+%%%% Fin progress bar
 
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
 \setbeamertemplate{frametitle}[default][left,leftskip=0.5cm]
@@ -169,10 +211,12 @@
 
 
   \setbeamercolor{subsection in toc}{fg=paleGrey, bg=mLightBlue}
+  \ifnum \value{framenumber}>1
   \begin{frame}[noframenumbering,plain]
     \frametitle{\textcolor{paleGrey}{Table des matières}}
     \tableofcontents[currentsection,sectionstyle=show/hide,subsectionstyle=hide/show/hide]
   \end{frame}
+  \fi
   \endgroup
 }
 
@@ -180,20 +224,7 @@
 %---------------------------------------------------------------------
 % Frametitle
 % ---------------------------------------------------------------------
-\setbeamertemplate{headline}{%
-  \nointerlineskip
-  \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,ht=12pt,dp=7pt]{block title}%
-    \usebeamerfont{page number in head/foot}{\insertsection}
-  \end{beamercolorbox}%
-  \if@useTitleProgressBar
-  \nointerlineskip
-  % \vspace{-0.7cm}
-  \begin{beamercolorbox}[wd=\paperwidth,ht=0pt,dp=5pt]{section}
-    \progressbar@titleprogressbar
-  \end{beamercolorbox}
-  \fi
- \nointerlineskip
-}
+
 % }}}
 
 \setbeamertemplate{frametitle}{%
@@ -233,28 +264,7 @@
 
 
 
-\if@useTitleProgressBar
-\def\progressbar@titleprogressbar{%
-  \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe}
-  \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe}
-  \ifnum\value{progressbar@tmpcountb}<1
-  \setcounter{progressbar@tmpcountb}{1}
-  \fi
-  \ifnum\value{progressbar@tmpcountb}>1
-    \progressbar@tmpdim=\paperwidth\relax
-  % \showthe\value{progressbar@tmpcounta}
-  % \showthe\value{progressbar@tmpcountb}
-  \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
-  \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
-  \fi
-  
-%  \the\progressbar@tmpdim
-  \begin{tikzpicture}[tight background]
-    \draw[mMediumBlue, fill=mMediumBlue] (0, 0) rectangle (\paperwidth, 2pt);
-    \draw[mDarkBlue, fill=mDarkBlue] (0, 0) rectangle (\progressbar@tmpdim, 2pt);
-  \end{tikzpicture}
-}
-\fi
+
 %}}}
 %{{{ --- Commands ---------------------
 
