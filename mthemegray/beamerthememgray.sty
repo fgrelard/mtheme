@@ -91,7 +91,7 @@
     \vfill
     \ifx\inserttitle\@empty%
     \else%
-    {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeLowercase{\inserttitle}\par}%
+    {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\textsc{\inserttitle}\par}%
     \vspace*{0.5em}
     \fi%
     \ifx\insertsubtitle\@empty%
@@ -104,7 +104,7 @@
     \ifx\insertauthor\@empty%
     \else%
     {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
-    \vspace*{0.25em}
+    \vspace*{1em}
     \fi%
     \ifx\insertdate\@empty%
     \else%
@@ -157,8 +157,8 @@
   \fi
   \ifnum\value{progressbar@tmpcountb}>1
     \progressbar@tmpdim=\paperwidth\relax
-  % \showthe\value{progressbar@tmpcounta}
-  % \showthe\value{progressbar@tmpcountb}
+   %\showthe\value{progressbar@tmpcounta}
+   %\showthe\value{progressbar@tmpcountb}
   \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
   \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
   \fi
@@ -174,7 +174,12 @@
 \setbeamertemplate{headline}{%
   \nointerlineskip
   \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm,ht=12pt,dp=7pt]{block title}%
+    
+    \ifx\insertsubsection\empty
     \usebeamerfont{page number in head/foot}{\insertsection}
+    \else
+    \usebeamerfont{page number in head/foot}{\insertsection~$|$~\insertsubsection}
+    \fi
   \end{beamercolorbox}%
   \if@useTitleProgressBar
   \nointerlineskip
