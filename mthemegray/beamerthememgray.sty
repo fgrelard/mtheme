@@ -152,15 +152,20 @@
 \def\progressbar@titleprogressbar{%
   \setcounter{progressbar@tmpcounta}{\insertframenumber - \insertsectionstartframe}
   \setcounter{progressbar@tmpcountb}{\insertsectionendframe - \insertsectionstartframe}
+  \ifnum\value{progressbar@tmpcounta}<1
+  \setcounter{progressbar@tmpcountb}{1}
+  \fi
   \ifnum\value{progressbar@tmpcountb}<1
   \setcounter{progressbar@tmpcountb}{1}
   \fi
   \ifnum\value{progressbar@tmpcountb}>1
-    \progressbar@tmpdim=\paperwidth\relax
-   %\showthe\value{progressbar@tmpcounta}
-   %\showthe\value{progressbar@tmpcountb}
+  \progressbar@tmpdim=\paperwidth\relax
+  % \showthe\value{progressbar@tmpcounta}
+  % \showthe\value{progressbar@tmpcountb}
+  \divide\progressbar@tmpdim by 100
   \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
   \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
+  \multiply\progressbar@tmpdim by 100
   \fi
   
 %  \the\progressbar@tmpdim
