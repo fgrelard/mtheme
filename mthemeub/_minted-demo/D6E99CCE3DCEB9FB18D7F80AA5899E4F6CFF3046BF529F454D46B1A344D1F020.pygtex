@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+The theme provides sensible defaults to \PYG{k}{\PYGZbs{}emph}\PYG{n+nb}{\PYGZob{}}emphasize\PYG{n+nb}{\PYGZcb{}}
+text, \PYG{k}{\PYGZbs{}alert}\PYG{n+nb}{\PYGZob{}}accent\PYG{n+nb}{\PYGZcb{}} parts or show \PYG{k}{\PYGZbs{}textbf}\PYG{n+nb}{\PYGZob{}}bold\PYG{n+nb}{\PYGZcb{}} results.
+\end{Verbatim}

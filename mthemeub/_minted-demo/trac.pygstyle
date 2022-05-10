@@ -1,0 +1,99 @@
+
+\makeatletter
+\def\PYGtrac@reset{\let\PYGtrac@it=\relax \let\PYGtrac@bf=\relax%
+    \let\PYGtrac@ul=\relax \let\PYGtrac@tc=\relax%
+    \let\PYGtrac@bc=\relax \let\PYGtrac@ff=\relax}
+\def\PYGtrac@tok#1{\csname PYGtrac@tok@#1\endcsname}
+\def\PYGtrac@toks#1+{\ifx\relax#1\empty\else%
+    \PYGtrac@tok{#1}\expandafter\PYGtrac@toks\fi}
+\def\PYGtrac@do#1{\PYGtrac@bc{\PYGtrac@tc{\PYGtrac@ul{%
+    \PYGtrac@it{\PYGtrac@bf{\PYGtrac@ff{#1}}}}}}}
+\def\PYGtrac#1#2{\PYGtrac@reset\PYGtrac@toks#1+\relax+\PYGtrac@do{#2}}
+
+\@namedef{PYGtrac@tok@w}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PYGtrac@tok@c}{\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.53}{##1}}}
+\@namedef{PYGtrac@tok@cp}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@cs}{\let\PYGtrac@bf=\textbf\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@o}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@s}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sr}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.50,0.50,0.00}{##1}}}
+\@namedef{PYGtrac@tok@m}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@k}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@kt}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.27,0.33,0.53}{##1}}}
+\@namedef{PYGtrac@tok@nb}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@nf}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.00,0.00}{##1}}}
+\@namedef{PYGtrac@tok@nc}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.27,0.33,0.53}{##1}}}
+\@namedef{PYGtrac@tok@ne}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.00,0.00}{##1}}}
+\@namedef{PYGtrac@tok@nn}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.33,0.33,0.33}{##1}}}
+\@namedef{PYGtrac@tok@nv}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@no}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@nt}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PYGtrac@tok@na}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@ni}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PYGtrac@tok@gh}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@gu}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.67,0.67,0.67}{##1}}}
+\@namedef{PYGtrac@tok@gd}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.00,0.00}{##1}}\def\PYGtrac@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{1.00,0.87,0.87}{\strut ##1}}}}
+\@namedef{PYGtrac@tok@gi}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.00,0.00}{##1}}\def\PYGtrac@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.87,1.00,0.87}{\strut ##1}}}}
+\@namedef{PYGtrac@tok@gr}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.67,0.00,0.00}{##1}}}
+\@namedef{PYGtrac@tok@ge}{\let\PYGtrac@it=\textit}
+\@namedef{PYGtrac@tok@gs}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@gp}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.33,0.33,0.33}{##1}}}
+\@namedef{PYGtrac@tok@go}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PYGtrac@tok@gt}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.67,0.00,0.00}{##1}}}
+\@namedef{PYGtrac@tok@err}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.65,0.09,0.09}{##1}}\def\PYGtrac@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.89,0.82,0.82}{\strut ##1}}}}
+\@namedef{PYGtrac@tok@kc}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@kd}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@kn}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@kp}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@kr}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@bp}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@fm}{\let\PYGtrac@bf=\textbf\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.00,0.00}{##1}}}
+\@namedef{PYGtrac@tok@vc}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@vg}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@vi}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@vm}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.50,0.50}{##1}}}
+\@namedef{PYGtrac@tok@sa}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sb}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sc}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@dl}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sd}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@s2}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@se}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sh}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@si}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@sx}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@s1}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@ss}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.73,0.53,0.27}{##1}}}
+\@namedef{PYGtrac@tok@mb}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@mf}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@mh}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@mi}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@il}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@mo}{\def\PYGtrac@tc##1{\textcolor[rgb]{0.00,0.60,0.60}{##1}}}
+\@namedef{PYGtrac@tok@ow}{\let\PYGtrac@bf=\textbf}
+\@namedef{PYGtrac@tok@ch}{\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.53}{##1}}}
+\@namedef{PYGtrac@tok@cm}{\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.53}{##1}}}
+\@namedef{PYGtrac@tok@cpf}{\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.53}{##1}}}
+\@namedef{PYGtrac@tok@c1}{\let\PYGtrac@it=\textit\def\PYGtrac@tc##1{\textcolor[rgb]{0.60,0.60,0.53}{##1}}}
+
+\def\PYGtracZbs{\char`\\}
+\def\PYGtracZus{\char`\_}
+\def\PYGtracZob{\char`\{}
+\def\PYGtracZcb{\char`\}}
+\def\PYGtracZca{\char`\^}
+\def\PYGtracZam{\char`\&}
+\def\PYGtracZlt{\char`\<}
+\def\PYGtracZgt{\char`\>}
+\def\PYGtracZsh{\char`\#}
+\def\PYGtracZpc{\char`\%}
+\def\PYGtracZdl{\char`\$}
+\def\PYGtracZhy{\char`\-}
+\def\PYGtracZsq{\char`\'}
+\def\PYGtracZdq{\char`\"}
+\def\PYGtracZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYGtracZat{@}
+\def\PYGtracZlb{[}
+\def\PYGtracZrb{]}
+\makeatother
+
