@@ -24,6 +24,7 @@
 \usefonttheme{metropolisub}
 \usepackage{soul}
 
+\usepackage{xfp}
 %}}}
 %{{{ --- Options ----------------------
 
@@ -189,6 +190,7 @@
 \newdimen\progressbar@pbht      % progressbar height
 \newdimen\progressbar@pbwd      % progressbar width
 \newdimen\progressbar@tmpdim    % auxiliary dimension
+\newdimen\progressbar@tmph    % auxiliary dimension
 
 \progressbar@pbwd=22em
 \progressbar@pbht=0.4pt
@@ -212,20 +214,24 @@
   \multiply\progressbar@tmpdim by \arabic{progressbar@tmpcounta}
   \divide\progressbar@tmpdim by \arabic{progressbar@tmpcountb}
   \multiply\progressbar@tmpdim by 100
+
+  % \progressbar@tmph=\progressbar@tmpdim\relax
+  \def\progressbar@tmph{\fpeval{\progressbar@tmpdim * 0.3 / \paperwidth}}
+
   \fi
   
 %  \the\progressbar@tmpdim
   \begin{tikzpicture}[tight background]
-    \draw[mDarkTeal!20, fill=mDarkTeal!20] (0, 0) rectangle (\paperwidth, 1pt);
-    \draw[mDarkTeal, fill=mDarkTeal] (0, 0) rectangle (\progressbar@tmpdim, 1pt);
+    \draw[mDarkTeal!20, fill=mDarkTeal!20] (0, 0) -- (\paperwidth, 0.29) -- (\paperwidth, \the\numexpr 0.34) -- (0, 0.05) -- cycle;
+    \draw[mDarkTeal, fill=mDarkTeal] (0, 0) -- (\progressbar@tmpdim, \progressbar@tmph) -- (\progressbar@tmpdim, \the\numexpr \progressbar@tmph+0.05) -- (0, 0.05) -- cycle;
   \end{tikzpicture}
 }
 \fi
 
 \setbeamertemplate{headline}{%
   \begin{tikzpicture}
-    \draw[tight background, mMediumBrown, fill=mMediumBrown] (0,0) rectangle (\paperwidth, 0.75);  
-    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,0) -- (1.5,0) -- (0,0.75) -- cycle;
+    \draw[tight background, mMediumBrown, fill=mMediumBrown] (0,0) -- (\paperwidth, 0.3) -- (\paperwidth, 0.75) -- (0, 0.75) -- cycle;  
+    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,0) -- (1.5,0.1) -- (0,0.75) -- cycle;
     \ifx\insertsubsection\empty
     \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\usebeamerfont{block title}{\insertsection}};
     \else
