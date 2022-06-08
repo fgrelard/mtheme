@@ -380,8 +380,8 @@
 \setbeamertemplate{footline}
 {%
   \begin{tikzpicture}[remember picture, overlay]
-    \draw[tight background, mDarkTeal, fill=mDarkTeal] (\dimexpr 0.85 \paperwidth,0) -- (\paperwidth,0) -- (\paperwidth,1.5) -- cycle;
-    \node[text=white, text width=1cm] at (\dimexpr 0.97 \paperwidth, 0.37) {\usebeamerfont{page number in head/foot}{\insertframenumber{} / \inserttotalframenumber}};
+    % \draw[tight background, mDarkTeal, fill=mDarkTeal] (\dimexpr 0.85 \paperwidth,0) -- (\paperwidth,0) -- (\paperwidth,1.5) -- cycle;
+    \node[text width=1cm] at (\dimexpr 0.97 \paperwidth, 0.37) {\usebeamerfont{page number in head/foot}{\insertframenumber{} / \inserttotalframenumber}};
   \end{tikzpicture}%
 
 
