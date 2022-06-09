@@ -63,7 +63,7 @@
 \setbeamercolor{block title}{parent=palette quaternary}
 \setbeamercolor{block body}{parent=palette secondary}
 \setbeamercolor{block title example}{fg=white, bg=hsrmSec1Dark}
-\setbeamercolor{block body example}{fg=white, bg=hsrmSec1}
+\setbeamercolor{block body example}{fg=white, bg=mMediumBrown!20!white}
 \setbeamercolor{block title alerted}{fg=white, bg=hsrmRedDark}
 \setbeamercolor{block body alerted}{fg=white, bg=hsrmRed}
 % Notes
@@ -94,7 +94,7 @@
     \draw[tight background, mDarkTeal, fill=mDarkTeal] ([xshift=11cm, yshift=0cm]current page.north west) -- ([xshift=0cm, yshift=2cm]current page.east) -- (current page.north east) -- cycle;
     \ifx\inserttitle\vspace{1mm}%
     \else%
-    \node[anchor=west] at ([xshift=1cm, yshift=2.5cm]current page.west) {\usebeamerfont{title}\usebeamercolor[fg]{title2}\scshape\textsc{{\inserttitle}}};
+    \node[anchor=west, text width=0.85\linewidth] at ([xshift=1cm, yshift=2.5cm]current page.west) {\usebeamerfont{title}\usebeamercolor[fg]{title2}\scshape\textsc{{\inserttitle}}};
     % {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\textsc{\inserttitle}\par}%
     \vspace{0.5mm}
     \fi%
@@ -404,7 +404,6 @@
 
 \setbeamertemplate{footnote}
 {%
-  \parindent 0em\noindent%
   \raggedright
   \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
