@@ -231,12 +231,20 @@
 \setbeamertemplate{headline}{%
   \begin{tikzpicture}
     \draw[tight background, mMediumBrown, fill=mMediumBrown] (0,0) -- (\paperwidth, 0.3) -- (\paperwidth, 0.75) -- (0, 0.75) -- cycle;  
-    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,0) -- (1.5,0.1) -- (0,0.75) -- cycle;
-    \ifx\insertsubsection\empty
-    \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\usebeamerfont{block title}{\insertsection}};
-    \else
-    \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\usebeamerfont{block title}{\insertsection~$|$~\insertsubsection}};
-    \fi
+    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,0) -- (1.5,0.1) -- (0,0.75) -- cycle node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\begin{minipage}[t]{5cm}%
+        \ifx\insertsubsection\empty
+        {\usebeamerfont{block title}\insertsection}%
+        \else
+        {\usebeamerfont{block title}\insertsection~$|$~\insertsubsection}%
+        \fi
+        \end{minipage}};
+    % \ifx\insertsubsection\empty
+    % \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {};
+    % \else
+    % \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\usebeamerfont{block title}{\begin{minipage}[htbp]{1.0\linewidth}%
+    %       \insertsection~$|$~\insertsubsection%
+    %     \end{minipage}}};
+    % \fi
   \end{tikzpicture}%
   
   \nointerlineskip
