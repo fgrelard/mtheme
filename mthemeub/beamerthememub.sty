@@ -230,14 +230,15 @@
 
 \setbeamertemplate{headline}{%
   \begin{tikzpicture}
-    \draw[tight background, mMediumBrown, fill=mMediumBrown] (0,0) -- (\paperwidth, 0.3) -- (\paperwidth, 0.75) -- (0, 0.75) -- cycle;  
-    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,0) -- (1.5,0.1) -- (0,0.75) -- cycle node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {\begin{minipage}[t]{5cm}%
+    \draw[tight background, mMediumBrown, fill=mMediumBrown] (0,-0.1) -- (\paperwidth, 0.2) -- (\paperwidth, 0.75) -- (0, 0.75) -- cycle;  
+    \draw[tight background, mDarkTeal, fill=mDarkTeal] (0,-0.1) -- (1.5,0.0) -- (0,0.75) -- cycle node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {
+      \begin{minipage}[t]{\paperwidth}%
         \ifx\insertsubsection\empty
         {\usebeamerfont{block title}\insertsection}%
         \else
-        {\usebeamerfont{block title}\insertsection~$|$~\insertsubsection}%
+        {\usebeamerfont{block title}\insertsection~$|$~\usebeamerfont{caption}\insertsubsection}%
         \fi
-        \end{minipage}};
+      \end{minipage}};
     % \ifx\insertsubsection\empty
     % \node[text=mLightBrownLighter, text width=1cm] at (1, 0.37) {};
     % \else
@@ -387,17 +388,17 @@
 \usenavigationsymbolstemplate{}
 \setbeamertemplate{footline}
 {%
-  \begin{tikzpicture}[remember picture, overlay]
-    % \draw[tight background, mDarkTeal, fill=mDarkTeal] (\dimexpr 0.85 \paperwidth,0) -- (\paperwidth,0) -- (\paperwidth,1.5) -- cycle;
-    \node[text width=1cm] at (\dimexpr 0.97 \paperwidth, 0.37) {\usebeamerfont{page number in head/foot}{\insertframenumber{} / \inserttotalframenumber}};
-  \end{tikzpicture}%
+ %  \begin{tikzpicture}[remember picture, overlay]
+ %    % \draw[tight background, mDarkTeal, fill=mDarkTeal] (\dimexpr 0.85 \paperwidth,0) -- (\paperwidth,0) -- (\paperwidth,1.5) -- cycle;
+ %    \node[text width=1cm] at (\dimexpr 0.97 \paperwidth, 0.37) {\usebeamerfont{page number in head/foot}{\insertframenumber{} / \inserttotalframenumber}};
+ %  \end{tikzpicture}%
 
 
- \nointerlineskip%
-  % \begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
-  %   \hfill\usebeamerfont{page number in head/foot}%
-  %   \insertframenumber{} / \inserttotalframenumber%
-  % \end{beamercolorbox}%
+ % \nointerlineskip%
+  \begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
+    \hfill\usebeamerfont{page number in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber%
+  \end{beamercolorbox}%
 }
 
 
